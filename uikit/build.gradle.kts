@@ -8,7 +8,7 @@ group = "io.github.anandwana001"
 version = "0.1.0"
 
 android {
-    namespace = "com.example.agoraagentcomposeuikit.uikitlib"
+    namespace = "io.agora.agentuikit"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -42,6 +42,7 @@ android {
     publishing {
         singleVariant("release") {
             withSourcesJar()
+            withJavadocJar()
         }
     }
 }
@@ -82,16 +83,27 @@ afterEvaluate {
                     developers {
                         developer {
                             id.set("anandwana001")
-                            name.set("Akshay Anandwana")
-                            url.set("https://github.com/anandwana001")
+                            name.set("Akshay Nandwana")
+                            email.set("akshay.nandwana@agora.io")
                         }
                     }
 
                     scm {
                         url.set("https://github.com/anandwana001/agent-uikit")
                         connection.set("scm:git:git://github.com/anandwana001/agent-uikit.git")
-                        developerConnection.set("scm:git:ssh://git@github.com/anandwana001/agent-uikit.git")
+                        developerConnection.set("scm:git:ssh://github.com:anandwana001/agent-uikit.git")
                     }
+                }
+            }
+        }
+
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/anandwana001/agent-uikit")
+                credentials {
+                    username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_ACTOR")
+                    password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
                 }
             }
         }

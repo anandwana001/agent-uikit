@@ -148,15 +148,31 @@ VideoGridWithControls(
 └── .github/                 # CI, issue templates, PR template
 ```
 
-## Publishing Direction
+## Consuming From GitHub Packages
 
-The library module is already structured for publishing and includes:
+Consumers need the GitHub Packages repository in their Gradle setup:
 
-- Maven publishing configuration
-- Group: `io.github.anandwana001`
-- Artifact: `agent-uikit`
-- Versioned release metadata
-- Sources jar for the release variant
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url = uri("https://maven.pkg.github.com/anandwana001/agent-uikit")
+            credentials {
+                username = "<github-username>"
+                password = "<github-token>"
+            }
+        }
+    }
+}
+```
+
+Dependency:
+
+```kotlin
+implementation("io.github.anandwana001:agent-uikit:0.1.0")
+```
 
 ## Current Status
 
